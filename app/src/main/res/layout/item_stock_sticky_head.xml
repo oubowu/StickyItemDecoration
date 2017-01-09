@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:id="@+id/fl"
+             xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_marginLeft="0dp"
+             android:layout_marginRight="0dp"
+             android:layout_marginBottom="0dp"
+             android:layout_marginTop="0dp"
+             android:layout_height="wrap_content"
+             android:background="#aaaaff">
+
+    <TextView
+        android:id="@+id/tv_stock_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="16dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:textColor="#eeeeee"
+        android:textSize="16dp"
+        tools:text="涨幅榜"/>
+
+    <ImageView
+        android:id="@+id/iv_more"
+        android:layout_width="24dp"
+        android:layout_height="6dp"
+        android:layout_gravity="center_vertical|right"
+        android:layout_marginRight="16dp"
+        android:src="@mipmap/more"
+        android:tint="#223344"/>
+
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:checked="false"
+        android:clickable="true"
+        android:layout_marginRight="46dp"
+        android:layout_gravity="center_vertical|right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</FrameLayout>
