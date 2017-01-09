@@ -1,6 +1,6 @@
 # RecyclerView粘性头部
 一种新的解决思路，对比我之前写的[PinnedSectionItemDecoration](https://github.com/oubowu/PinnedSectionItemDecoration)有如下好处：<p>
-- 粘性头部是放置在RecyclerView外面的View，对比之前绘制出来的粘性头部，能显示出点击的效果，并且点击事件更加简单<p>
+- 粘性头部是放置在RecyclerView外面的View，对比之前绘制出来的粘性头部，能显示出点击的效果，并且处理点击事件更加简单<p>
 - 不需要频繁的创建粘性头部的View用于绘制，只需要刷新外置的粘性头部的数据即可
 
 # 效果图
@@ -86,5 +86,19 @@ RecyclerView只需要添加一个StickyItemDecoration即可实现粘性头部，
         mRecyclerView.addItemDecoration(new StickyItemDecoration(container, RecyclerViewAdapter.TYPE_STICKY_HEAD));
         mRecyclerView.addItemDecoration(new SpaceItemDecoration(mRecyclerView.getContext()));
 ```
+Adapter需要重写这两个方法，用于处理GridLayoutManager和StaggeredGridLayoutManager模式下的头部使之占满一行
+```
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        FullSpanUtil.onAttachedToRecyclerView(recyclerView, this, TYPE_STICKY_HEAD);
+    }
 
-### PS:若是使用了下拉刷新的控件配合RecyclerView使用的话(显示刷新头部并且RecyclerView跟随头部的显示往下移动那种类型)，因为StickyHeadContainer是独立于RecyclerView存在的，不能跟随RecyclerView移动，需要根据刷新头部的显示情况设置StickyHeadContainer的可见性
+    @Override
+    public void onViewAttachedToWindow(RecyclerViewHolder holder) {
+        super.onViewAttachedToWindow(holder);
+        FullSpanUtil.onViewAttachedToWindow(holder, this, TYPE_STICKY_HEAD);
+    }
+```
+
+##### PS:若是使用了下拉刷新的控件配合RecyclerView使用的话(显示刷新头部并且RecyclerView跟随头部的显示往下移动那种类型)，因为StickyHeadContainer是独立于RecyclerView存在的，不能跟随RecyclerView移动，需要根据刷新头部的显示情况设置StickyHeadContainer的可见性
