@@ -4,7 +4,8 @@
 - 不需要频繁的创建粘性头部的View用于绘制，只需要刷新外置的粘性头部的数据即可
 
 # 效果图
-![效果图](http://ww1.sinaimg.cn/large/904ec4b1jw1fbkslqz6ygg20az0m97wh.gif)<p>
+![普通头部](http://ww1.sinaimg.cn/large/904ec4b1jw1fbkslqz6ygg20az0m97wh.gif)
+![附着头部](http://ww4.sinaimg.cn/large/904ec4b1jw1fbluz259rig20b00m9nj3.gif)<p>
 
 # 代码实现
 StickyHeadContainer用来承载粘性头部布局，并且需要和RecyclerView的顶部对齐

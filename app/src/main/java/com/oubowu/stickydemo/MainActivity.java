@@ -1,6 +1,7 @@
 package com.oubowu.stickydemo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -61,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             protected String doInBackground(Void... voids) {
-                return getStrFromAssets("rasking.json");
+                return getStrFromAssets(MainActivity.this, "rasking.json");
             }
 
             @Override
@@ -162,9 +163,8 @@ public class MainActivity extends AppCompatActivity {
      * @return Json数据（String）
      * @description 通过assets文件获取json数据，这里写的十分简单，没做循环判断。
      */
-    private String getStrFromAssets(String name) {
-
-        AssetManager assetManager = getAssets();
+    public static String getStrFromAssets(Context context, String name) {
+        AssetManager assetManager = context.getAssets();
         try {
             InputStream is = assetManager.open(name);
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private class SpaceItemDecoration extends RecyclerView.ItemDecoration {
+    public static class SpaceItemDecoration extends RecyclerView.ItemDecoration {
 
         private final int[] ATTRS = new int[]{android.R.attr.listDivider};
 
@@ -207,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
             int type = parent.getAdapter().getItemViewType(parent.getChildAdapterPosition(view));
-            if (type != StockAdapter.TYPE_DATA) {
+            if (type != RecyclerViewAdapter.TYPE_DATA && type != RecyclerViewAdapter.TYPE_SMALL_STICKY_HEAD_WITH_DATA) {
                 outRect.set(0, 0, 0, 0);
             } else {
                 outRect.set(0, 0, 0, mDivider.getIntrinsicHeight());
@@ -226,12 +226,16 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_delete && mAdapter.getData().size() > 1) {
-            for (int i = 1; i < 12; i++) {
-                mAdapter.getData().remove(1);
-            }
-            mAdapter.notifyDataSetChanged();
-            return true;
+        //        if (id == R.id.action_delete && mAdapter.getData().size() > 1) {
+        //            for (int i = 1; i < 12; i++) {
+        //                mAdapter.getData().remove(1);
+        //            }
+        //            mAdapter.notifyDataSetChanged();
+        //            return true;
+        //        }
+
+        if (id == R.id.action_jump) {
+            startActivity(new Intent(this, SecondActivity.class));
         }
 
         return super.onOptionsItemSelected(item);

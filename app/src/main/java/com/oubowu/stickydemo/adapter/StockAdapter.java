@@ -25,7 +25,7 @@ import java.util.List;
  */
 public class StockAdapter extends RecyclerViewAdapter<StockEntity.StockInfo, StickyHeadEntity<StockEntity.StockInfo>> implements CompoundButton.OnCheckedChangeListener {
 
-    public final static int TYPE_HEAD = 3;
+    public final static int TYPE_HEAD = 4;
 
     public StockAdapter(List<StickyHeadEntity<StockEntity.StockInfo>> data) {
         super(data);
@@ -52,13 +52,16 @@ public class StockAdapter extends RecyclerViewAdapter<StockEntity.StockInfo, Sti
                 return R.layout.item_stock_sticky_head;
             case TYPE_DATA:
                 return R.layout.item_stock_data;
+            case TYPE_SMALL_STICKY_HEAD_WITH_DATA:
+                return R.layout.item_stock_small_sticky_data;
         }
         return 0;
     }
 
     @Override
     public void bindData(RecyclerViewHolder holder, int viewType, int position, StockEntity.StockInfo item) {
-        switch (holder.getItemViewType()) {
+        int type = holder.getItemViewType();
+        switch (type) {
 
             case TYPE_STICKY_HEAD:
 
@@ -72,18 +75,25 @@ public class StockAdapter extends RecyclerViewAdapter<StockEntity.StockInfo, Sti
                 break;
 
             case TYPE_DATA:
-                final String stockNameAndCode = item.stock_name + "\n" + item.stock_code;
-                SpannableStringBuilder ssb = new SpannableStringBuilder(stockNameAndCode);
-                ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#a4a4a7")), item.stock_name.length(), stockNameAndCode.length(),
-                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                ssb.setSpan(new AbsoluteSizeSpan(dip2px(holder.itemView.getContext(), 13)), item.stock_name.length(), stockNameAndCode.length(),
-                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-                holder.setText(R.id.tv_stock_name_code, ssb).setText(R.id.tv_current_price, item.current_price)
-                        .setText(R.id.tv_rate, (item.rate < 0 ? String.format("%.2f", item.rate) : "+" + String.format("%.2f", item.rate)) + "%");
+                setData(holder, item);
+                break;
+            case TYPE_SMALL_STICKY_HEAD_WITH_DATA:
+                setData(holder, item);
+                holder.setText(R.id.tv_stock_name, item.stickyHeadName);
                 break;
 
         }
+    }
+
+    private void setData(RecyclerViewHolder holder, StockEntity.StockInfo item) {
+        final String stockNameAndCode = item.stock_name + "\n" + item.stock_code;
+        SpannableStringBuilder ssb = new SpannableStringBuilder(stockNameAndCode);
+        ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#a4a4a7")), item.stock_name.length(), stockNameAndCode.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ssb.setSpan(new AbsoluteSizeSpan(dip2px(holder.itemView.getContext(), 13)), item.stock_name.length(), stockNameAndCode.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        holder.setText(R.id.tv_stock_name_code, ssb).setText(R.id.tv_current_price, item.current_price)
+                .setText(R.id.tv_rate, (item.rate < 0 ? String.format("%.2f", item.rate) : "+" + String.format("%.2f", item.rate)) + "%");
     }
 
     private int dip2px(Context context, float dpValue) {

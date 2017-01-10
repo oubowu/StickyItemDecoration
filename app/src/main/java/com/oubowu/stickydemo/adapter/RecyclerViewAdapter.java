@@ -21,6 +21,7 @@ public abstract class RecyclerViewAdapter<T, V extends StickyHeadEntity<T>> exte
 
     public final static int TYPE_DATA = 1;
     public final static int TYPE_STICKY_HEAD = 2;
+    public final static int TYPE_SMALL_STICKY_HEAD_WITH_DATA = 3;
 
     protected List<V> mData;
 

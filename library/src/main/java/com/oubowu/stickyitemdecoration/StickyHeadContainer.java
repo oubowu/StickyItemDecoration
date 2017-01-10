@@ -118,7 +118,6 @@ public class StickyHeadContainer extends ViewGroup {
     protected void scrollChild(int offset) {
         if (mLastOffset != offset) {
             mOffset = offset;
-            //            requestLayout();
             ViewCompat.offsetTopAndBottom(getChildAt(0), mOffset - mLastOffset);
         }
         mLastOffset = mOffset;

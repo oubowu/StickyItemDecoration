@@ -3,8 +3,8 @@
       xmlns:tools="http://schemas.android.com/tools"
       tools:context="com.oubowu.stickyitemdecoration.com.oubowu.stickydemo.MainActivity">
     <item
-        android:id="@+id/action_delete"
+        android:id="@+id/action_jump"
         android:orderInCategory="100"
-        android:title="删除一个类别"
+        android:title="跳转附着头部Demo"
         app:showAsAction="never"/>
 </menu>
