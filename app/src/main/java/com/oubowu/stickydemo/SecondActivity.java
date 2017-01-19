@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.oubowu.stickydemo.adapter.RecyclerViewAdapter;
 import com.oubowu.stickydemo.adapter.StockAdapter;
+import com.oubowu.stickydemo.callback.OnItemClickListener;
 import com.oubowu.stickydemo.entitiy.StickyHeadEntity;
 import com.oubowu.stickydemo.entitiy.StockEntity;
 import com.oubowu.stickyitemdecoration.StickyHeadContainer;
@@ -81,7 +82,12 @@ public class SecondActivity extends AppCompatActivity {
         mRecyclerView.addItemDecoration(new MainActivity.SpaceItemDecoration(mRecyclerView.getContext()));
 
         mAdapter = new StockAdapter(null);
-
+        mAdapter.setItemClickListener(new OnItemClickListener<StockEntity.StockInfo>() {
+            @Override
+            public void onItemClick(View view, StockEntity.StockInfo data, int position) {
+                Toast.makeText(SecondActivity.this, "点击了Item" , Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void parseAndSetData(String result) {
