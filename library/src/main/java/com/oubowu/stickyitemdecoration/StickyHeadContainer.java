@@ -115,7 +115,7 @@ public class StickyHeadContainer extends ViewGroup {
         return p instanceof MarginLayoutParams;
     }
 
-    protected void scrollChild(int offset) {
+    public void scrollChild(int offset) {
         if (mLastOffset != offset) {
             mOffset = offset;
             ViewCompat.offsetTopAndBottom(getChildAt(0), mOffset - mLastOffset);
@@ -134,7 +134,7 @@ public class StickyHeadContainer extends ViewGroup {
         mLastStickyHeadPosition = stickyHeadPosition;
     }
 
-    protected void reset() {
+    public void reset() {
         mLastStickyHeadPosition = Integer.MIN_VALUE;
     }
 

@@ -29,6 +29,7 @@ import com.oubowu.stickydemo.callback.OnItemClickListener;
 import com.oubowu.stickydemo.entitiy.StickyHeadEntity;
 import com.oubowu.stickydemo.entitiy.StockEntity;
 import com.oubowu.stickyitemdecoration.DividerHelper;
+import com.oubowu.stickyitemdecoration.OnStickyChangeListener;
 import com.oubowu.stickyitemdecoration.StickyHeadContainer;
 import com.oubowu.stickyitemdecoration.StickyItemDecoration;
 
@@ -112,14 +113,28 @@ public class MainActivity extends AppCompatActivity {
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false));
-        mRecyclerView.addItemDecoration(new StickyItemDecoration(container, RecyclerViewAdapter.TYPE_STICKY_HEAD));
+        StickyItemDecoration stickyItemDecoration = new StickyItemDecoration(container, RecyclerViewAdapter.TYPE_STICKY_HEAD);
+        stickyItemDecoration.setOnStickyChangeListener(new OnStickyChangeListener() {
+            @Override
+            public void onScrollable(int offset) {
+                container.scrollChild(offset);
+                container.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onInVisible() {
+                container.reset();
+                container.setVisibility(View.INVISIBLE);
+            }
+        });
+        mRecyclerView.addItemDecoration(stickyItemDecoration);
         mRecyclerView.addItemDecoration(new SpaceItemDecoration(mRecyclerView.getContext()));
 
         mAdapter = new StockAdapter(null);
         mAdapter.setItemClickListener(new OnItemClickListener<StockEntity.StockInfo>() {
             @Override
             public void onItemClick(View view, StockEntity.StockInfo data, int position) {
-                Toast.makeText(MainActivity.this, "点击了Item" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "点击了Item", Toast.LENGTH_SHORT).show();
             }
         });
     }
