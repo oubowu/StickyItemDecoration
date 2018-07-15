@@ -24,6 +24,12 @@ public class StickyItemDecoration extends RecyclerView.ItemDecoration {
     private StickyHeadContainer mStickyHeadContainer;
     private boolean mEnableStickyHead = true;
 
+
+    private OnStickyChangeListener mOnStickyChangeListener;
+    public void setOnStickyChangeListener(OnStickyChangeListener onStickyChangeListener){
+        this.mOnStickyChangeListener = onStickyChangeListener;
+    }
+
     public StickyItemDecoration(StickyHeadContainer stickyHeadContainer, int stickyHeadType) {
         mStickyHeadContainer = stickyHeadContainer;
         mStickyHeadType = stickyHeadType;
@@ -57,11 +63,13 @@ public class StickyItemDecoration extends RecyclerView.ItemDecoration {
             } else {
                 offset = 0;
             }
-            mStickyHeadContainer.scrollChild(offset);
-            mStickyHeadContainer.setVisibility(View.VISIBLE);
+            if (mOnStickyChangeListener!=null){
+                mOnStickyChangeListener.onScrollable(offset);
+            }
         } else {
-            mStickyHeadContainer.reset();
-            mStickyHeadContainer.setVisibility(View.INVISIBLE);
+            if (mOnStickyChangeListener!=null){
+                mOnStickyChangeListener.onInVisible();
+            }
         }
 
     }
