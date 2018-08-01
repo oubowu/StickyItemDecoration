@@ -103,3 +103,20 @@ Adapter需要重写这两个方法，用于处理GridLayoutManager和StaggeredGr
 ```
 
 ##### PS:若是使用了下拉刷新的控件配合RecyclerView使用的话(显示刷新头部并且RecyclerView跟随头部的显示往下移动那种类型)，因为StickyHeadContainer是独立于RecyclerView存在的，不能跟随RecyclerView移动，需要根据刷新头部的显示情况设置StickyHeadContainer的可见性
+
+#### License
+```
+Copyright 2016 oubowu
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
