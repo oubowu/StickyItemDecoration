@@ -90,8 +90,8 @@ public class SecondActivity extends AppCompatActivity {
                 container.setVisibility(View.INVISIBLE);
             }
         });
-        mRecyclerView.addItemDecoration(stickyItemDecoration);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        mRecyclerView.addItemDecoration(stickyItemDecoration);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(SecondActivity.this, LinearLayoutManager.VERTICAL, false));
         mRecyclerView.addItemDecoration(stickyItemDecoration);
         mRecyclerView.addItemDecoration(new MainActivity.SpaceItemDecoration(mRecyclerView.getContext()));
