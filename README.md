@@ -1,4 +1,5 @@
 # RecyclerView粘性头部
+已适配Androidx，需要切到androidx分支即可
 一种新的解决思路，对比我之前写的[PinnedSectionItemDecoration](https://github.com/oubowu/PinnedSectionItemDecoration)有如下好处：<p>
 - 粘性头部是放置在RecyclerView外面的View，对比之前绘制出来的粘性头部，能显示出点击的效果，并且处理点击事件更加简单<p>
 - 不需要频繁的创建粘性头部的View用于绘制，只需要刷新外置的粘性头部的数据即可
