@@ -2,7 +2,6 @@ package com.oubowu.stickydemo.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.AbsoluteSizeSpan;
@@ -17,6 +16,8 @@ import com.oubowu.stickydemo.holder.RecyclerViewHolder;
 import com.oubowu.stickyitemdecoration.FullSpanUtil;
 
 import java.util.List;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 
 /**
